@@ -269,67 +269,70 @@
       background-color: #555;
     }
 
-    /* Mobile Responsive Styling */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-      }
+   @media (max-width: 768px) {
+  nav {
+    flex-direction: row;      /* keep horizontal */
+    flex-wrap: wrap;          /* allow wrapping if needed */
+    justify-content: center;  /* center nav links */
+  }
 
-      nav a {
-        width: 100%;
-        padding: 12px;
-      }
+  nav a {
+    width: auto;              /* auto width to stay horizontal */
+    padding: 12px 10px;       /* adjust padding */
+    font-size: 14px;          /* slightly smaller font */
+  }
 
-      .profile-container {
-        width: 100px;
-        height: 100px;
-      }
+  /* Keep other mobile styles you had */
+  .profile-container {
+    width: 100px;
+    height: 100px;
+  }
 
-      .profile-container img {
-        width: 100%;
-        height: 100%;
-      }
+  .profile-container img {
+    width: 100%;
+    height: 100%;
+  }
 
-      .home h1 {
-        font-size: 24px;
-      }
+  .home h1 {
+    font-size: 24px;
+  }
 
-      #skills .skills-row {
-        flex-direction: column;
-        align-items: center;
-      }
+  #skills .skills-row {
+    flex-direction: column;
+    align-items: center;
+  }
 
-      #skills .skill {
-        width: 100px;
-        margin: 12px auto;
-      }
+  #skills .skill {
+    width: 100px;
+    margin: 12px auto;
+  }
 
-      #skills img {
-        width: 30px;
-        height: 30px;
-      }
+  #skills img {
+    width: 30px;
+    height: 30px;
+  }
 
-      section h2 {
-        font-size: 22px;
-      }
+  section h2 {
+    font-size: 22px;
+  }
 
-      .project-title {
-        font-size: 20px;
-      }
+  .project-title {
+    font-size: 20px;
+  }
 
-      .project-summary {
-        font-size: 14px;
-      }
+  .project-summary {
+    font-size: 14px;
+  }
 
-      .tech-btn {
-        font-size: 14px;
-        padding: 5px 10px;
-      }
+  .tech-btn {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
 
-      #contact p {
-        font-size: 16px;
-      }
-    }
+  #contact p {
+    font-size: 16px;
+  }
+}
   </style>
 </head>
 

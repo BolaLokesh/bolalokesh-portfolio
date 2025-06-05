@@ -1,435 +1,1075 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bola Lokesh Portfolio</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bola Lokesh Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Basic Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333; /* Default text color */
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-    nav {
-      background-color: #333;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 15px;
-      font-size: 16px;
-      flex: 1;
-      text-align: center;
-      transition: background-color 0.3s ease;
-    }
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* Stack header and links on mobile */
+            align-items: center; /* Center items for larger screens too */
+            padding: 0; /* Remove padding from nav itself */
+        }
 
-    nav a:hover {
-      background-color: #555;
-    }
+        /* Header row within the nav for mode toggles and hamburger */
+        .nav-header {
+            display: flex;
+            justify-content: space-between; /* Pushes toggle buttons and hamburger apart */
+            align-items: center;
+            width: 100%;
+            padding: 5px 15px; /* Padding for the header row */
+            background-color: #333; /* Match nav background */
+        }
 
-    html {
-      scroll-behavior: smooth;
-    }
+        /* Mode Toggle Buttons */
+        .toggle-buttons {
+            display: flex;
+            align-items: center;
+        }
 
-    section {
-      padding: 10px 15px;
-      text-align: center;
-    }
+        .toggle-button {
+            background: none;
+            border: 1px solid white;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
 
-    section h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #333;
-    }
+        .toggle-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
 
-    section p,
-    section ul {
-      font-size: 16px;
-      color: #555;
-    }
+        /* Hamburger Menu Icon */
+        .hamburger-menu {
+            display: none; /* Hidden by default on desktop */
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px; /* Make it easier to click */
+        }
 
-    .home {
-      padding: 50px 15px;
-      background-color: rgba(37, 213, 37, 0.5);
-      color: white;
-    }
+        /* Navigation Links Container */
+        .nav-links {
+            display: flex; /* Default to flex for desktop */
+            width: 100%;
+            justify-content: center; /* Center links on desktop */
+            flex-wrap: wrap; /* Allow wrapping */
+        }
 
-    .home h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            font-size: 16px;
+            flex: 1; /* Allows links to share space */
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
 
-    .home .wave {
-      display: inline-block;
-      animation: shake 1s ease forwards;
-    }
+        nav a:hover {
+            background-color: #555;
+        }
 
-    @keyframes shake {
-      0%, 100% { transform: rotate(0deg); }
-      20% { transform: rotate(15deg); }
-      40% { transform: rotate(-10deg); }
-      60% { transform: rotate(10deg); }
-      80% { transform: rotate(-5deg); }
-    }
+        /* Section Styling */
+        section {
+            padding: 40px 15px;
+            text-align: center;
+        }
 
-    .profile-container {
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 15px;
-      border-radius: 50%;
-      overflow: hidden;
-      position: relative;
-    }
+        section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-    .profile-container img {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+        section p,
+        section ul {
+            font-size: 16px;
+            color: #555;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 800px;
+        }
 
-    .home h1 {
-      font-weight: bold;
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
+        section ul {
+            list-style-position: inside;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
 
-    .home p {
-      font-size: 18px;
-      font-style: italic;
-    }
+        /* Home Section */
+        .home {
+            padding: 50px 15px;
+            background-color: rgba(37, 213, 37, 0.5);
+            color: white;
+        }
 
-    #skills .skills-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+        .home h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
 
-    #skills .skills-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-    }
+        .home .wave {
+            display: inline-block;
+        }
+        
+        .home .wave:hover {
+            animation: shake 1s ease forwards;
+        }
 
-    #skills .skill {
-      text-align: center;
-      margin: 10px;
-      width: 120px;
-    }
+        .home .wave.animate-on-load {
+            animation: shake 1s ease forwards;
+        }
 
-    #skills img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 10px;
-    }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(15deg); }
+            40% { transform: rotate(-10deg); }
+            60% { transform: rotate(10deg); }
+            80% { transform: rotate(-5deg); }
+        }
 
-    .contact p {
-      font-size: 18px;
-      color: #333;
-    }
+        /* Bounce Animation for Icons */
+        .bounce-on-hover {
+            display: inline-block;
+            transition: transform 0.2s ease-out;
+        }
 
-    .contact .contact-info {
-      font-size: 16px;
-      color: #555;
-      margin-top: 15px;
-    }
+        .bounce-on-hover:hover {
+            animation: bounce 0.6s ease-in-out;
+            animation-fill-mode: forwards;
+        }
 
-    .contact a {
-      color: #333;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            20% {
+                transform: translateY(-10px);
+            }
+            40% {
+                transform: translateY(0);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+            80% {
+                transform: translateY(0);
+            }
+        }
 
-    .contact a:hover {
-      color: #00ff33;
-    }
+        .profile-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid white;
+        }
 
-    .project-box {
-      background-color: #fff;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: left;
-      transition: transform 0.3s ease;
-    }
+        .profile-container img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
 
-    .project-box:hover {
-      transform: translateY(-10px);
-    }
+        .home h1 {
+            font-weight: bold;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
 
-    .project-title {
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-    }
+        .home p {
+            font-size: 18px;
+            font-style: italic;
+            text-align: center;
+        }
 
-    .project-summary {
-      margin-top: 10px;
-      margin-bottom: 15px;
-      font-size: 16px;
-      color: #555;
-    }
+        /* Skills Section */
+        #skills .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-    .github-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      text-decoration: none;
-    }
+        #skills .skill {
+            text-align: center;
+            margin: 10px;
+            width: 100px;
+        }
 
-    .github-btn:hover {
-      background-color: #0056b3;
-    }
+        #skills img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease-in-out;
+            opacity: 1;
+        }
 
-    .tech-stack {
-      margin-top: 10px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+        #skills img:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
 
-    .tech-btn {
-      padding: 6px 12px;
-      background-color: #f1f1f1;
-      border: 1px solid #ccc;
-      border-radius: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+        /* Contact Section */
+        .contact p {
+            font-size: 18px;
+            color: #333;
+        }
 
-    .tech-btn:hover {
-      background-color: #e0e0e0;
-    }
+        .contact .contact-info {
+            font-size: 16px;
+            color: #555;
+            margin-top: 15px;
+            text-align: center;
+        }
 
-    #contact {
-      padding: 20px;
-      font-family: Arial, sans-serif;
-    }
+        .contact a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
 
-    #contact h2 {
-      font-size: 28px;
-      margin-bottom: 15px;
-      color: #333;
-    }
+        .contact a:hover {
+            color: #0056b3;
+        }
 
-    #contact p {
-      font-size: 18px;
-      margin: 10px 0;
-      color: #555;
-    }
+        .contact-icon {
+            color: #333;
+            margin-right: 10px;
+        }
 
-    .contact-icon {
-      color: black;
-      margin-right: 10px;
-    }
+        /* Box Styles (for Education, Projects, Achievements) */
+        .content-box {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 15px;
-    }
+        .content-box:hover,
+        #experience .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
 
-    footer a {
-      color: white;
-      text-decoration: none;
-      padding: 4px 8px;
-      border-radius: 3px;
-      background-color: #444;
-      transition: background-color 0.3s ease;
-    }
+        .content-box img {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
 
-    footer a:hover {
-      background-color: #555;
-    }
+        .content-box img:hover {
+            opacity: 1;
+        }
 
-   @media (max-width: 768px) {
-  nav {
-    flex-direction: row;      /* keep horizontal */
-    flex-wrap: wrap;          /* allow wrapping if needed */
-    justify-content: center;  /* center nav links */
-  }
+        .box-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .box-dates {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
 
-  nav a {
-    width: auto;              /* auto width to stay horizontal */
-    padding: 12px 10px;       /* adjust padding */
-    font-size: 14px;          /* slightly smaller font */
-  }
+        .box-summary {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #555;
+        }
 
-  /* Keep other mobile styles you had */
-  .profile-container {
-    width: 100px;
-    height: 100px;
-  }
+        .github-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 15px;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
 
-  .profile-container img {
-    width: 100%;
-    height: 100%;
-  }
+        .github-btn:hover {
+            background-color: #0056b3;
+        }
 
-  .home h1 {
-    font-size: 24px;
-  }
+        .tech-stack {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
 
-  #skills .skills-row {
-    flex-direction: column;
-    align-items: center;
-  }
+        .tech-btn {
+            padding: 5px 10px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 16px;
+            cursor: default;
+            font-size: 14px;
+            color: #495057;
+        }
 
-  #skills .skill {
-    width: 100px;
-    margin: 12px auto;
-  }
+        /* Experience Section Specifics */
+        #experience .experience-item {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        #experience .experience-item h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        #experience .experience-item .job-title {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        #experience .experience-item .job-dates {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        #experience .experience-item ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        #experience .experience-item li {
+            margin-bottom: 8px;
+        }
+        #experience .experience-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
 
-  #skills img {
-    width: 30px;
-    height: 30px;
-  }
+        #experience .experience-item img:hover {
+            opacity: 1;
+        }
 
-  section h2 {
-    font-size: 22px;
-  }
+        /* New Flex Container for Experience & Projects */
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
 
-  .project-title {
-    font-size: 20px;
-  }
+        .content-grid .content-box,
+        .content-grid .experience-item {
+            flex: 1 1 calc(50% - 30px);
+            min-width: 300px;
+            max-width: calc(50% - 30px);
+            margin-bottom: 0;
+        }
 
-  .project-summary {
-    font-size: 14px;
-  }
+        .content-grid .content-box img,
+        .content-grid .experience-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
 
-  .tech-btn {
-    font-size: 14px;
-    padding: 5px 10px;
-  }
 
-  #contact p {
-    font-size: 16px;
-  }
-}
-  </style>
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+        }
+
+        footer span {
+            font-weight: bold;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 3px;
+            background-color: #444;
+            transition: background-color 0.3s ease;
+        }
+
+        footer a:hover {
+            background-color: #555;
+        }
+
+        /* Scroll-to-top button */
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; /* Hidden by default, shown by JS when scrolled */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 999;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            opacity: 0.9;
+        }
+
+        #scrollTopBtn:hover {
+            background-color: #0056b3;
+            opacity: 1;
+        }
+
+        /* Mode Specific Styles */
+        /* Day Mode */
+        .day-mode {
+            background-color: #f4f4f4;
+            color: #000;
+        }
+        .day-mode section h2, .day-mode .box-title, .day-mode .contact-icon, .day-mode #experience .experience-item h3 {
+            color: #333;
+        }
+        .day-mode section p, .day-mode section ul, .day-mode .box-summary, .day-mode .contact p, .day-mode #experience .experience-item .job-title, .day-mode #experience .experience-item li {
+            color: #555;
+        }
+        .day-mode .content-box, .day-mode #experience .experience-item {
+            background-color: #fff;
+        }
+        /* Night Mode */
+        .night-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .night-mode nav, .night-mode .nav-header {
+            background-color: #222;
+        }
+        .night-mode section h2, .night-mode .box-title, .night-mode .contact-icon, .night-mode #experience .experience-item h3 {
+            color: #eee;
+        }
+        .night-mode section p, .night-mode section ul, .night-mode .box-summary, .night-mode .contact p, .night-mode #experience .experience-item .job-title, .night-mode #experience .experience-item li {
+            color: #bbb;
+        }
+        .night-mode .content-box, .night-mode #experience .experience-item {
+            background-color: #444;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .night-mode .tech-btn {
+            background-color: #555;
+            border-color: #666;
+            color: #eee;
+        }
+        .night-mode .contact a {
+            color: #88ccff;
+        }
+        .night-mode footer {
+            background-color: #222;
+        }
+        .night-mode #skills img {
+            /* No specific changes needed */
+        }
+        .night-mode .content-box img, .night-mode #experience .experience-item img {
+            /* No specific changes needed */
+        }
+        .night-mode #skills img:hover, .night-mode .content-box img:hover, .night-mode #experience .experience-item img:hover {
+            opacity: 1;
+        }
+
+        /* Rainbow Mode */
+        .rainbow-mode {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #4b0082, #9400d3);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #000; /* Black text for contrast */
+        }
+        @keyframes gradientShift {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .rainbow-mode nav, .rainbow-mode .nav-header, .rainbow-mode footer {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background for readability */
+            color: white;
+        }
+        .rainbow-mode nav a, .rainbow-mode .toggle-button, .rainbow-mode .hamburger-menu {
+            color: white;
+            border-color: white;
+        }
+        .rainbow-mode section h2, .rainbow-mode .box-title, .rainbow-mode .contact-icon, .rainbow-mode #experience .experience-item h3 {
+            color: #333; /* Darker text for better readability on bright background */
+        }
+        .rainbow-mode section p, .rainbow-mode section ul, .rainbow-mode .box-summary, .rainbow-mode .contact p, .rainbow-mode #experience .experience-item .job-title, .rainbow-mode #experience .experience-item li {
+            color: #555;
+        }
+        .rainbow-mode .content-box, .rainbow-mode #experience .experience-item {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white for projects */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .rainbow-mode .tech-btn {
+            background-color: rgba(233, 236, 239, 0.7);
+            border-color: rgba(206, 212, 218, 0.7);
+            color: #495057;
+        }
+        .rainbow-mode #skills img {
+            /* No specific changes needed */
+        }
+        .rainbow-mode .content-box img, .rainbow-mode #experience .experience-item img {
+            opacity: 0.6;
+        }
+        .rainbow-mode #skills img:hover, .rainbow-mode .content-box img:hover, .rainbow-mode #experience .experience-item img:hover {
+            opacity: 1;
+        }
+
+        /* Mobile Responsive Styling */
+        @media (max-width: 768px) {
+            nav {
+                align-items: flex-start; /* Align nav content to the left */
+            }
+
+            .nav-header {
+                justify-content: space-between; /* Keep spacing between mode buttons and hamburger */
+            }
+
+            .hamburger-menu {
+                display: block; /* Show hamburger on mobile */
+            }
+
+            .nav-links {
+                display: none; /* Hide nav links by default on mobile */
+                flex-direction: column; /* Stack links vertically */
+                width: 100%;
+                text-align: center;
+                /* Optional: Add a transition for opening/closing */
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+            }
+
+            .nav-links.active { /* Class to show the menu */
+                display: flex; /* Show links when active */
+                max-height: 500px; /* Adjust to a value large enough to show all links */
+            }
+
+            nav a {
+                width: 100%;
+                padding: 12px;
+                border-bottom: 1px solid #555; /* Separator for menu items */
+            }
+            nav a:last-child {
+                border-bottom: none; /* No border for the last item */
+            }
+
+            .toggle-buttons {
+                justify-content: flex-start; /* Align to the left on mobile header */
+                flex: 1; /* Take up available space to push hamburger right */
+            }
+            .toggle-button {
+                margin: 0 5px;
+            }
+
+            .profile-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .home h1 {
+                font-size: 28px;
+            }
+            .home h3 {
+                font-size: 20px;
+            }
+            .home p {
+                font-size: 16px;
+            }
+
+            #skills .skills-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #skills .skill {
+                width: 100px;
+                margin: 15px auto;
+            }
+
+            #skills img {
+                width: 45px;
+                height: 45px;
+            }
+
+            section h2 {
+                font-size: 24px;
+            }
+
+            section p, section ul {
+                padding: 0 10px;
+                text-align: left;
+            }
+
+            .box-title {
+                font-size: 22px;
+            }
+
+            .box-summary {
+                font-size: 15px;
+            }
+
+            .tech-btn {
+                font-size: 13px;
+                padding: 4px 8px;
+            }
+            
+            #contact p {
+                font-size: 16px;
+            }
+
+            /* Stack experience and projects vertically on small screens */
+            .content-grid {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
 </head>
 
-<body>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<body class="day-mode">
+    <nav>
+        <div class="nav-header">
+            <div class="toggle-buttons">
+                <button class="toggle-button" title="Day Mode" onclick="setMode('day')"><i class="fas fa-sun"></i></button>
+                <button class="toggle-button" title="Night Mode" onclick="setMode('night')"><i class="fas fa-moon"></i></button>
+                <button class="toggle-button" title="Rainbow Mode" onclick="setMode('rainbow')"><i class="fas fa-rainbow"></i></button>
+                <button class="toggle-button" title="Random Mode" onclick="setMode('random')"><i class="fas fa-dice"></i></button> 
+            </div>
+            <button class="hamburger-menu" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="nav-links" id="mainNavLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-  <section id="home" class="home">
-    <h3><span class="wave" title="Hello 👋">🖐️</span> Hi, I am Lokesh</h3>
-    <div class="profile-container">
-      <img src="Lokesh-photo.jpg" alt="Bola Lokesh">
-    </div>
-    <h1>Bola Lokesh</h1>
-    <p>Full Stack Developer</p>
-    <br>
-    <a href="https://drive.google.com/file/d/1lBhjqMct4Ox22j59kmebI9pk8Z4CHneH/view?usp=drive_link" target="_blank" class="github-btn">View Resume</a>
-  </section>
+    <section id="home" class="home">
+        <h2>Home</h2>
+        <div>
+            <h3><span class="wave animate-on-load" title="Hello 👋">🖐️</span> Hi, I am Lokesh</h3>
+            <div class="profile-container">
+                <img src="Lokesh-photo.jpg" alt="Bola Lokesh Profile Picture">
+            </div>
+            <h1>Bola Lokesh</h1>
+            <p style="text-align: center;">Full Stack Developer</p>
+            <br>
+            <a href="https://drive.google.com/file/d/1lBhjqMct4Ox22j59kmebI9pk8Z4CHneH/view?usp=drive_link" target="_blank" class="github-btn">View Resume</a>
+        </div>
+    </section>
 
-  <section id="about">
-    <h2>About</h2>
-    <p>I'm a Full Stack Developer skilled in Java, Python, Node.js, and React.</p>
-    <p>I've worked with Spring Boot, Hibernate, and MySQL to build web applications.</p>
-    <p>I'm passionate about creating scalable solutions and optimizing performance.</p>
-    <p>I'm a quick learner, problem solver, and eager to take on new challenges.</p>
-  </section>
+    <section id="about">
+        <h2>About Me</h2>
+        <div>
+            <p>A detail-oriented and solution-driven IT Support and Full Stack Developer with a strong background in backend development, data processing, and customer support. I am proficient in Java, Python, and modern web technologies, with practical exposure to cloud platforms, Docker, and MySQL. I excel at building robust full-stack applications and optimizing code for performance. I am eager to contribute in a dynamic, data-driven environment with a strong focus on problem-solving and scalable solutions.</p>
+        </div>
+    </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-container">
-      <div class="skills-row">
-        <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML"><p>HTML</p></div>
-        <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS"><p>CSS</p></div>
-        <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript"><p>JavaScript</p></div>
-        <div class="skill"><img src="https://www.vectorlogo.zone/logos/java/java-icon.svg" alt="Java"><p>Java</p></div>
-      </div>
-      <div class="skills-row">
-        <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/528/528260.png" alt="MySQL"><p>MySQL</p></div>
-        <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python"><p>Python</p></div>
-        <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="React"><p>React</p></div>
-        <div class="skill"><img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot"><p>Spring Boot</p></div>
-      </div>
-    </div>
-  </section>
+    <section id="education">
+        <h2>Education</h2>
+        <div>
+            <div class="content-box">
+                <img src="https://www.sietk.org/images/1.png" alt="Siddartha Institute of Science and Technology Logo">
+                <h3 class="box-title">Bachelor of Technology (Electronics and Communication Engineering)</h3>
+                <p>Siddartha Institute of Science and Technology</p>
+                <p class="box-dates">July 2018 - June 2022</p>
+                <p>CGPA: 6.71/10</p>
+            </div>
+        </div>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project-box">
-      <div class="project-title">Electric Bill Generator</div>
-      <div class="project-summary">Developed a real-time web application using Spring Boot, JSP, and MySQL for generating electricity bills and managing user data.</div>
-      <a href="https://github.com/BolaLokesh/Electronic-Bill-Generator" target="_blank" class="github-btn">View on GitHub</a>
-      <div class="tech-stack">
-        <span class="tech-btn">Spring Boot</span>
-        <span class="tech-btn">JSP</span>
-        <span class="tech-btn">MySQL</span>
-      </div>
-    </div>
+    <section id="experience">
+        <h2>Experience</h2>
+        <div>
+            <div class="content-grid">
+                <div class="experience-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg/1200px-M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg" alt="Novaluna Technologies Office Building">
+                    <h3>Python Developer Intern | Novaluna Technologies</h3>
+                    <p class="job-dates">May 2024 - September 2024</p>
+                    <ul>
+                        <li>Developed and maintained Python applications for data processing and task automation.</li>
+                        <li>Utilized Pandas and NumPy to efficiently analyze and manipulate large datasets.</li>
+                        <li>Debugged and optimized existing code, significantly improving application performance.</li>
+                        <li>Collaborated on projects, contributing to the full development lifecycle from design to deployment.</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E22AQH9jdyMHMO1Qw/feedshare-shrink_800/feedshare-shrink_800/0/1702982191879?e=2147483647&v=beta&t=1qYZ1xcJC5RBltk-i8olsQDCPzknQzodb-2nIqI0mDI" alt="IQTree Technologies Office">
+                    <h3>Full Stack Developer Intern | IQTree Technosoft</h3>
+                    <p class="job-dates">March 2025 - Present</p>
+                    <ul>
+                        <li>Actively contributing to the development of the CISO (Cybersecurity Information System Optimization) project.</li>
+                        <li>Researched and evaluated cutting-edge front-end and back-end frameworks for secure system design.</li>
+                        <li>Participated in critical planning sessions, code reviews, and architecture discussions to ensure audit readiness.</li>
+                        <li>Gaining hands-on experience in secure development practices, cloud deployment, and diverse full-stack technologies.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="project-box">
-      <div class="project-title">E-commerce Platform</div>
-      <div class="project-summary">Built a full-stack e-commerce platform with React, Node.js, and MySQL, with features like product listings and user authentication.</div>
-      <a href="https://github.com/BolaLokesh/ecommerce" target="_blank" class="github-btn">View on GitHub</a>
-      <div class="tech-stack">
-        <span class="tech-btn">React</span>
-        <span class="tech-btn">Node.js</span>
-        <span class="tech-btn">MySQL</span>
-        <span class="tech-btn">AWS</span>
-      </div>
-    </div>
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <div>
+            <div class="skills-container">
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/java/java-icon.svg" alt="Java Icon"><p>Java</p></div>
+                <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python Icon"><p>Python</p></div>
+                <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript Icon"><p>JavaScript</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg" alt="Node.js Icon"><p>Node.js</p></div>
+                
+                <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML5 Icon"><p>HTML5</p></div>
+                <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS3 Icon"><p>CSS3</p></div>
+                <div class="skill"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React Icon"><p>React.js</p></div>
 
-    <div class="project-box">
-      <div class="project-title">QuizMaker</div>
-      <div class="project-summary">An interactive web-based quiz platform that allows users to create, take, and track quizzes with real-time scoring and leaderboard features.</div>
-      <a href="https://github.com/BolaLokesh/QuizMaker" target="_blank" class="github-btn">View on GitHub</a>
-      <div class="tech-stack">
-        <span class="tech-btn">React</span>
-        <span class="tech-btn">Spring Boot</span>
-        <span class="tech-btn">MySQL</span>
-      </div>
-    </div>
-  </section>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot Icon"><p>Spring Boot</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/hibernate/hibernate-icon.svg" alt="Hibernate Icon"><p>Hibernate</p></div>
+                <div class="skill"><img src="https://3.imimg.com/data3/YJ/RY/MY-8946344/j2ee-language-courses-500x500.png" alt="J2EE Icon"><p>J2EE</p></div>
+                <div class="skill"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTGLbZM0QiRHsfej67ycrb3UB8oUYHLq_Deg&s" alt="JSP Icon"><p>JSP</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/apache_tomcat/apache_tomcat-icon.svg" alt="Servlets Icon"><p>Servlets</p></div>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p><i class="fas fa-envelope contact-icon"></i> bolalokesh21@gmail.com</p>
-    <p><i class="fas fa-phone contact-icon"></i> +91 9381860805</p>
-    <p><i class="fas fa-map-marker-alt contact-icon"></i> Proddatur, India</p>
-  </section>
+                <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/528/528260.png" alt="MySQL Icon"><p>MySQL</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg" alt="MongoDB Icon"><p>MongoDB</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg" alt="PostgreSQL Icon"><p>PostgreSQL</p></div>
+                
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS Icon"><p>AWS</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" alt="Docker Icon"><p>Docker</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="CI/CD Icon"><p>CI/CD</p></div>
+                
+                <div class="skill"><img src="https://media.licdn.com/dms/image/v2/D4E12AQGjjme0tHec-w/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1721178574978?e=2147483647&v=beta&t=7QEXsjGpvtW3ahKuuwtKdkNbINe_NkZsZ7vegAKqg1Q" alt="DeepAI API Icon"><p>DeepAI API</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/eclipse/eclipse-icon.svg" alt="Eclipse Icon"><p>Eclipse</p></div>
+                <div class="skill"><img src="https://dl.flathub.org/media/com/jetbrains/IntelliJ-IDEA-Ultimate/abf65e4438699ed3a3072695caa0db9f/icons/128x128@2/com.jetbrains.IntelliJ-IDEA-Ultimate.png" alt="IntelliJ IDEA Icon"><p>IntelliJ IDEA</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/visualstudio_code/visualstudio_code-icon.svg" alt="VS Code Icon"><p>VS Code</p></div>
+                <div class="skill"><img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="GitHub Icon"><p>GitHub</p></div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>Made with Bola Lokesh</p>
-    <br>
-    <a href="#home">Back to Top</a>
-  </footer>
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3 class="box-title">Electricity Bill Generator</h3>
+                    <p class="box-dates">November 2023 - December 2023</p>
+                    <img src="https://images2.alphacoders.com/110/1107966.jpg" alt="Electric Bill Generator Project Image">
+                    <p class="box-summary">I developed a real-time electricity billing system designed to simplify bill generation and management. This project features a robust backend built with <strong>Spring Boot</strong> and a secure <strong>MySQL</strong> database for data storage. The user interface, crafted using <strong>JSP</strong>, <strong>Servlets</strong>, and <strong>Bootstrap</strong>, provides a responsive and intuitive experience. Key functionalities include user authentication and secure data persistence, ensuring accurate and reliable record keeping for consumers.</p>
+                    <div class="tech-stack">
+                        <span class="tech-btn">Spring Boot</span>
+                        <span class="tech-btn">MySQL</span>
+                        <span class="tech-btn">JSP</span>
+                        <span class="tech-btn">Servlets</span>
+                        <span class="tech-btn">Bootstrap</span>
+                    </div>
+                    <a href="https://github.com/BolaLokesh/Electronic-Bill-Generator" target="_blank" class="github-btn">View on GitHub</a>
+                </div>
+
+                <div class="content-box">
+                    <h3 class="box-title">E-commerce Platform</h3>
+                    <p class="box-dates">June 2024 - August 2024</p>
+                    <img src="https://wallpapers.com/images/hd/e-commerce-pictures-z89ayrkro3dede7v.jpg" alt="E-commerce Platform Project Image">
+                    <p class="box-summary">I engineered a comprehensive full-stack e-commerce platform, providing a seamless online shopping experience. The dynamic front-end is powered by <strong>React</strong>, offering a highly interactive user interface, while a reliable <strong>MySQL</strong> database handles all backend data. This platform includes essential features such as extensive product listings, efficient search capabilities, secure user login and registration, and a fully functional shopping cart. For scalability and consistent deployment, the application was deployed on <strong>AWS</strong> utilizing <strong>Docker</strong>.</p>
+                    <div class="tech-stack">
+                        <span class="tech-btn">React</span>
+                        <span class="tech-btn">Node.js</span>
+                        <span class="tech-btn">MySQL</span>
+                        <span class="tech-btn">AWS</span>
+                        <span class="tech-btn">Docker</span>
+                    </div>
+                    <a href="https://github.com/BolaLokesh/ecommerce" target="_blank" class="github-btn">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <h2>Achievements & Certifications</h2>
+        <div>
+            <div class="content-box">
+                <img src="https://media.istockphoto.com/id/1296652778/photo/golden-trophy-cup-on-dark-background-copy-space-for-text-3d-rendering.jpg?s=612x612&w=0&k=20&c=koelD8IzGb2OnosDzAIEVdo0Hwd9c3YNWtR3Y1ixjjQ=" alt="Achievements Image">
+                <h3 class="box-title">Key Achievements</h3>
+                <ul>
+                    <li>Successfully completed a Full Stack Java course, gaining extensive hands-on experience in both client-side and server-side development, which empowered me to independently build and deploy 100% functional full-stack applications.</li>
+                    <li>Implemented a core feature during an internship that significantly enhanced an internal tool’s efficiency by 20%, directly contributing to a reduction in processing time and an increase in team productivity by approximately 15%.</li>
+                </ul>
+
+                <h3 class="box-title">Certifications</h3>
+                <ul>
+                    <li>Java and SQL Advanced certification by Hacker Rank.</li>
+                    <li>Full Stack Developer certified by Tap Academy.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <div>
+            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope contact-icon bounce-on-hover"></i> Email: <a href="mailto:loki944818@gmail.com">loki944818@gmail.com</a></p>
+                <p><i class="fas fa-phone contact-icon"></i> Phone: <a href="tel:+919381860805">+91-9381860805</a></p>
+                <p><i class="fab fa-linkedin contact-icon bounce-on-hover"></i> LinkedIn: <a href="https://www.linkedin.com/in/bolalokesh/" target="_blank">linkedin.com/in/bolalokesh/</a></p>
+                <p><i class="fab fa-github contact-icon bounce-on-hover"></i> GitHub: <a href="https://github.com/BolaLokesh" target="_blank">github.com/BolaLokesh</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 <span>Bola Lokesh</span>. All rights reserved.</p>
+        <br>
+        <a href="#home">Back to Top</a>
+    </footer>
+
+    <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // Global variable to store the interval ID for random mode
+        let randomColorInterval;
+
+        // Function to set the website mode (Day, Night, Rainbow, Random)
+        function setMode(mode) {
+            // Clear any existing random color interval when changing modes
+            if (randomColorInterval) {
+                clearInterval(randomColorInterval);
+                randomColorInterval = null;
+                // Reset specific inline styles set by random mode
+                document.body.style.backgroundColor = '';
+                document.body.style.transition = 'background-color 0.3s, color 0.3s'; // Restore default transition
+                // Reset styles for dynamically colored elements
+                document.querySelectorAll('.content-box, #experience .experience-item').forEach(el => {
+                    el.style.backgroundColor = '';
+                    el.style.boxShadow = '';
+                });
+                document.querySelectorAll('section h2, .box-title, .contact-icon, #experience .experience-item h3').forEach(el => {
+                    el.style.color = '';
+                });
+                document.querySelectorAll('section p, section ul, .box-summary, .contact p, #experience .experience-item .job-title, #experience .experience-item li').forEach(el => {
+                    el.style.color = '';
+                });
+                document.querySelectorAll('nav, .nav-header, footer').forEach(el => {
+                    el.style.backgroundColor = '';
+                    el.style.color = '';
+                });
+                document.querySelectorAll('nav a, .toggle-button, .hamburger-menu').forEach(el => {
+                    el.style.color = '';
+                    el.style.borderColor = '';
+                });
+                document.querySelectorAll('.tech-btn').forEach(el => {
+                    el.style.backgroundColor = '';
+                    el.style.borderColor = '';
+                    el.style.color = '';
+                });
+                document.querySelectorAll('.contact a, .github-btn').forEach(el => {
+                    el.style.color = '';
+                    el.style.backgroundColor = ''; // Reset background for github-btn
+                });
+                // Reset image opacities for rainbow mode if they were changed
+                document.querySelectorAll('.rainbow-mode .content-box img, .rainbow-mode #experience .experience-item img').forEach(img => {
+                    img.style.opacity = '';
+                });
+            }
+
+            // Remove all mode classes
+            document.body.classList.remove('day-mode', 'night-mode', 'rainbow-mode');
+
+            // Add the selected mode class
+            document.body.classList.add(`${mode}-mode`);
+
+            // Handle random mode logic
+            if (mode === 'random') {
+                document.body.style.transition = 'none'; // Disable smooth transition for rapid random changes
+                randomColorInterval = setInterval(() => {
+                    const randomBgColor = `hsl(${Math.random() * 360}, 70%, 80%)`; // Light pastel colors
+                    const randomContentBgColor = `hsl(${Math.random() * 360}, 50%, 95%)`; // Lighter for content boxes
+                    const randomTextColor = '#333'; // Keep text dark for readability
+
+                    document.body.style.backgroundColor = randomBgColor;
+                    document.body.style.color = randomTextColor;
+
+                    document.querySelectorAll('section h2, .box-title, .contact-icon, #experience .experience-item h3').forEach(el => {
+                        el.style.color = '#333'; // Ensure heading text is dark
+                    });
+                     document.querySelectorAll('section p, section ul, .box-summary, .contact p, #experience .experience-item .job-title, #experience .experience-item li').forEach(el => {
+                        el.style.color = '#555'; // Ensure body text is dark
+                    });
+
+                    document.querySelectorAll('.content-box, #experience .experience-item').forEach(el => {
+                        el.style.backgroundColor = randomContentBgColor;
+                        el.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+                    });
+
+                    // Set a consistent dark color for nav, toggles, footer in random mode
+                    document.querySelectorAll('nav, .nav-header, footer').forEach(el => {
+                        el.style.backgroundColor = '#333';
+                        el.style.color = 'white';
+                    });
+                    document.querySelectorAll('nav a, .toggle-button, .hamburger-menu').forEach(el => {
+                        el.style.color = 'white';
+                        el.style.borderColor = 'white';
+                    });
+                    document.querySelectorAll('.tech-btn').forEach(el => {
+                        el.style.backgroundColor = '#e9ecef'; // Default tech button color
+                        el.style.borderColor = '#ced4da';
+                        el.style.color = '#495057';
+                    });
+                     document.querySelectorAll('.contact a').forEach(el => {
+                        el.style.color = '#007bff';
+                    });
+                     document.querySelectorAll('.github-btn').forEach(el => {
+                        el.style.backgroundColor = '#007bff';
+                    });
+                }, 1000); // Change colors every 1 second
+            }
+        }
+
+        // --- SCROLL TO TOP BUTTON LOGIC ---
+        // Function to show/hide the button based on scroll position
+        window.onscroll = function() { scrollFunction() };
+
+        function scrollFunction() {
+            const scrollTopBtn = document.getElementById("scrollTopBtn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial hand wave animation
+            const waveHand = document.querySelector('.home .wave');
+            if (waveHand) {
+                waveHand.classList.add('animate-on-load');
+                waveHand.addEventListener('animationend', () => {
+                    waveHand.classList.remove('animate-on-load');
+                }, { once: true });
+            }
+
+            // Set initial mode on page load (e.g., 'day')
+            setMode('day'); // You can change 'day' to 'night' or 'rainbow' as your preferred default
+
+            // --- CLICK HANDLER FOR SCROLL TO TOP BUTTON ---
+            const scrollTopBtn = document.getElementById("scrollTopBtn");
+            if (scrollTopBtn) {
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth' // Smooth scroll
+                    });
+                });
+            }
+
+            // --- HAMBURGER MENU LOGIC ---
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navLinks = document.getElementById('mainNavLinks');
+
+            // Toggles the 'active' class on the nav links container when hamburger is clicked
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Closes the menu when a navigation link is clicked (for smooth scrolling on single-page apps)
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

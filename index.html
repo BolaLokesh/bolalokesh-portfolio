@@ -709,6 +709,18 @@
                 gap: 20px;
             }
         }
+        .contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-info a {
+  text-decoration: none;  /* removes underline */
+  color: inherit;         /* makes link take the parent text color */
+}
+
+
     </style>
 </head>
 
@@ -896,15 +908,22 @@
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <div>
-            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
-            <div class="contact-info">
-                <p><i class="fas fa-envelope contact-icon bounce-on-hover"></i> Email: <a href="mailto:bolalokesh21@gmail.com">bolalokesh21@gmail.com</a></p>
-                <p><i class="fas fa-phone contact-icon"></i> Phone: <a href="tel:+919381860805">+91-9381860805</a></p>
-                <p><i class="fab fa-linkedin contact-icon bounce-on-hover"></i> LinkedIn: <a href="https://www.linkedin.com/in/bolalokesh/" target="_blank">linkedin.com/in/bolalokesh/</a></p>
-                <p><i class="fab fa-github contact-icon bounce-on-hover"></i> GitHub: <a href="https://github.com/BolaLokesh" target="_blank">github.com/BolaLokesh</a></p>
-            </div>
-        </div>
+<div class="contact-info">
+    <p><i class="fas fa-envelope contact-icon bounce-on-hover"></i> Email: 
+      <a href="mailto:bolalokesh21@gmail.com" style="color: blue; text-decoration: none;">bolalokesh21@gmail.com</a>
+    </p>
+    <p><i class="fas fa-phone contact-icon"></i> Phone: 
+      <a href="tel:+919381860805" style="color: blue; text-decoration: none;">+91-9381860805</a>
+    </p>
+    <p><i class="fab fa-linkedin contact-icon bounce-on-hover"></i> LinkedIn: 
+      <a href="https://www.linkedin.com/in/bolalokesh/" target="_blank" style="color: blue; text-decoration: none;">linkedin.com/in/bolalokesh/</a>
+    </p>
+    <p><i class="fab fa-github contact-icon bounce-on-hover"></i> GitHub: 
+      <a href="https://github.com/BolaLokesh" target="_blank" style="color: blue; text-decoration: none;">github.com/BolaLokesh</a>
+    </p>
+</div>
+
+
     </section>
 
     <footer>
